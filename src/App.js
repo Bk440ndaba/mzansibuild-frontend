@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard';
 import Feed from './pages/Feed';
 import CreateProject from './pages/CreateProject';
 import ProjectDetail from './pages/ProjectDetail';
+import Celebration from './pages/Celebration';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/create-project" element={<CreateProject />} />
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/projects/:id" element={<ProjectDetail />} />
+        <Route path="/celebration" element={<Celebration />} />
       </Routes>
     </BrowserRouter>
   );
