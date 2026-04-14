@@ -12,7 +12,6 @@ export default function Login() {
     e.preventDefault();
     try {
       const user = await login({ email, password });
-      // Store user in localStorage or context
       localStorage.setItem('user', JSON.stringify(user));
       navigate('/dashboard');
     } catch (err) {
@@ -21,15 +20,59 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        <button type="submit">Login</button>
-      </form>
-      <p>Don't have an account? <Link to="/register">Register</Link></p>
+    <div className="min-h-screen bg-black flex items-center justify-center px-4">
+      <div className="bg-gray-900 border border-green-500 rounded-lg shadow-lg p-8 w-full max-w-md">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-green-500">MzansiBuild</h1>
+          <p className="text-gray-400 mt-2">Sign in to your account</p>
+        </div>
+
+        {error && (
+          <div className="bg-red-900/50 border border-red-500 text-red-200 px-4 py-2 rounded-md mb-4 text-sm">
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label className="block text-gray-300 text-sm font-medium mb-2">Email Address</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              placeholder="you@example.com"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-300 text-sm font-medium mb-2">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              placeholder="••••••••"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+          >
+            Sign In
+          </button>
+        </form>
+
+        <p className="text-center text-gray-400 text-sm mt-6">
+          Don't have an account?{' '}
+          <Link to="/register" className="text-green-500 hover:text-green-400 font-medium">
+            Register
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
